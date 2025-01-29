@@ -6,38 +6,77 @@
     <title>MKV to MP4 Converter</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #f4f4f4;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            margin: 0;
         }
+
         .container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             text-align: center;
+            backdrop-filter: blur(10px);
         }
-        input {
-            margin: 10px 0;
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
         }
-        button {
-            padding: 10px 15px;
-            background-color: #28a745;
-            color: white;
+
+        input[type="file"] {
+            display: block;
+            margin: 15px auto;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.2);
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
+            color: #fff;
             cursor: pointer;
         }
+
+        button {
+            padding: 12px 20px;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
         button:hover {
             background-color: #218838;
         }
+
         #downloadLink {
             display: none;
-            margin-top: 10px;
+            margin-top: 15px;
+            padding: 10px 15px;
+            background: #ffcc00;
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+
+        #downloadLink:hover {
+            background: #e6b800;
+        }
+
+        #status {
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -49,28 +88,6 @@
         <p id="status"></p>
         <a id="downloadLink" href="#" download>Download MP4</a>
     </div>
-    <script>
-        function convertVideo() {
-            const fileInput = document.getElementById('fileInput');
-            const status = document.getElementById('status');
-            const downloadLink = document.getElementById('downloadLink');
-            
-            if (fileInput.files.length === 0) {
-                status.textContent = 'Please select a file.';
-                return;
-            }
-            
-            const file = fileInput.files[0];
-            status.textContent = `Converting ${file.name}...`;
-            
-            setTimeout(() => {
-                const convertedFileName = file.name.replace('.mkv', '.mp4');
-                status.textContent = 'Conversion complete! Download your MP4 file.';
-                downloadLink.href = URL.createObjectURL(new Blob([file], { type: 'video/mp4' }));
-                downloadLink.download = convertedFileName;
-                downloadLink.style.display = 'block';
-            }, 3000); // Placeholder for actual conversion logic
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
