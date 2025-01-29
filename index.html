@@ -35,6 +35,10 @@
         button:hover {
             background-color: #218838;
         }
+        #downloadLink {
+            display: none;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -43,11 +47,13 @@
         <input type="file" id="fileInput" accept=".mkv">
         <button onclick="convertVideo()">Convert</button>
         <p id="status"></p>
+        <a id="downloadLink" href="#" download>Download MP4</a>
     </div>
     <script>
         function convertVideo() {
             const fileInput = document.getElementById('fileInput');
             const status = document.getElementById('status');
+            const downloadLink = document.getElementById('downloadLink');
             
             if (fileInput.files.length === 0) {
                 status.textContent = 'Please select a file.';
@@ -58,7 +64,11 @@
             status.textContent = `Converting ${file.name}...`;
             
             setTimeout(() => {
+                const convertedFileName = file.name.replace('.mkv', '.mp4');
                 status.textContent = 'Conversion complete! Download your MP4 file.';
+                downloadLink.href = URL.createObjectURL(new Blob([file], { type: 'video/mp4' }));
+                downloadLink.download = convertedFileName;
+                downloadLink.style.display = 'block';
             }, 3000); // Placeholder for actual conversion logic
         }
     </script>
