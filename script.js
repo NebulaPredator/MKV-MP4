@@ -6,6 +6,8 @@ function convertMKVtoMP4(inputFile, outputFile) {
     return new Promise((resolve, reject) => {
         ffmpeg(inputFile)
             .output(outputFile)
+            .videoCodec('libx264')
+            .audioCodec('aac')
             .on('end', () => {
                 console.log(`Conversion complete: ${outputFile}`);
                 resolve(outputFile);
