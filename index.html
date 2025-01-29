@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MKV to MP4 Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input {
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>MKV to MP4 Converter</h2>
+        <input type="file" id="fileInput" accept=".mkv">
+        <button onclick="convertVideo()">Convert</button>
+        <p id="status"></p>
+    </div>
+    <script>
+        function convertVideo() {
+            const fileInput = document.getElementById('fileInput');
+            const status = document.getElementById('status');
+            
+            if (fileInput.files.length === 0) {
+                status.textContent = 'Please select a file.';
+                return;
+            }
+            
+            const file = fileInput.files[0];
+            status.textContent = `Converting ${file.name}...`;
+            
+            setTimeout(() => {
+                status.textContent = 'Conversion complete! Download your MP4 file.';
+            }, 3000); // Placeholder for actual conversion logic
+        }
+    </script>
+</body>
+</html>
