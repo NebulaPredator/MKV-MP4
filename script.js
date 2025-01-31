@@ -6,8 +6,10 @@ function convertMKVtoMP4(inputFile, outputFile) {
     return new Promise((resolve, reject) => {
         ffmpeg(inputFile)
             .output(outputFile)
-            .videoCodec('libx264')
-            .audioCodec('aac')
+            .videoCodec('libx264') // Ensures H.264 video encoding
+            .audioCodec('aac')     // Ensures AAC audio encoding
+            .format('mp4')         // Ensures output format is MP4
+            .outputOptions('-movflags +faststart') // Optimizes for web streaming
             .on('end', () => {
                 console.log(`Conversion complete: ${outputFile}`);
                 resolve(outputFile);
@@ -28,7 +30,7 @@ function downloadFile(filePath) {
     }
 }
 
-const inputPath = 'input.mkv'; // Replace with your actual MKV file path
+const inputPath = 'input.mkv'; // Replace with actual MKV file path
 const outputPath = path.basename(inputPath, path.extname(inputPath)) + '.mp4';
 
 convertMKVtoMP4(inputPath, outputPath)
