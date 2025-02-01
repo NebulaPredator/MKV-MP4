@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MKV to MP4 Converter</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
         body {
             font-family: 'Poppins', sans-serif;
             display: flex;
@@ -12,18 +14,19 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background: #121212;
+            background: linear-gradient(135deg, #ff7eb3, #ff758c, #ff7eb3);
             color: #fff;
             margin: 0;
         }
 
         .container {
-            background: #1e1e1e;
+            background: rgba(0, 0, 0, 0.85);
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             text-align: center;
-            width: 320px;
+            width: 350px;
+            backdrop-filter: blur(10px);
         }
 
         h2 {
@@ -34,28 +37,30 @@
         input[type="file"] {
             width: 100%;
             padding: 12px;
-            border: 1px solid #333;
+            border: none;
             border-radius: 8px;
-            background: #292929;
-            color: #ddd;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
             cursor: pointer;
             margin-bottom: 15px;
+            outline: none;
         }
 
         button {
             width: 100%;
             padding: 12px;
-            background: #007bff;
+            background: #00c6ff;
             color: #fff;
             font-size: 16px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.2s;
         }
 
         button:hover {
-            background: #0056b3;
+            background: #007bff;
+            transform: scale(1.05);
         }
 
         #downloadLink {
@@ -67,7 +72,7 @@
             text-decoration: none;
             font-weight: bold;
             border-radius: 8px;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.2s;
             width: 100%;
             text-align: center;
             display: inline-block;
@@ -75,6 +80,7 @@
 
         #downloadLink:hover {
             background: #218838;
+            transform: scale(1.05);
         }
 
         #status {
