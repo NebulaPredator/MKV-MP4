@@ -6,9 +6,9 @@ function convertMKVtoMP4(inputFile, outputFile) {
     return new Promise((resolve, reject) => {
         ffmpeg(inputFile)
             .output(outputFile)
-            .videoCodec('libx264') // Ensures H.264 video encoding
-            .audioCodec('aac')     // Ensures AAC audio encoding
-            .format('mp4')         // Ensures output format is MP4
+            .videoCodec('libx264') // H.264 video encoding
+            .audioCodec('aac')     // AAC audio encoding
+            .format('mp4')         // Ensures MP4 output format
             .outputOptions('-movflags +faststart') // Optimizes for web streaming
             .on('end', () => {
                 console.log(`Conversion complete: ${outputFile}`);
@@ -30,12 +30,20 @@ function downloadFile(filePath) {
     }
 }
 
-const inputPath = 'input.mkv'; // Replace with actual MKV file path
-const outputPath = path.basename(inputPath, path.extname(inputPath)) + '.mp4';
+async function main() {
+    try {
+        const inputPath = path.resolve('input.mkv'); // Ensure full path
+        const outputPath = path.resolve(
+            path.dirname(inputPath),
+            path.basename(inputPath, path.extname(inputPath)) + '.mp4'
+        );
 
-convertMKVtoMP4(inputPath, outputPath)
-    .then(() => {
+        await convertMKVtoMP4(inputPath, outputPath);
         console.log('Conversion successful!');
         downloadFile(outputPath);
-    })
-    .catch(err => console.error('Conversion failed:', err));
+    } catch (err) {
+        console.error('Conversion failed:', err);
+    }
+}
+
+main();
