@@ -1,49 +1,42 @@
-const ffmpeg = require('fluent-ffmpeg');
-const path = require('path');
-const fs = require('fs');
+document.getElementById("convertBtn").addEventListener("click", async function () {
+    const fileInput = document.getElementById("fileInput");
+    const status = document.getElementById("status");
+    const progressContainer = document.getElementById("progressContainer");
+    const progressBar = document.getElementById("progressBar");
+    const downloadLink = document.getElementById("downloadLink");
 
-function convertMKVtoMP4(inputFile, outputFile) {
-    return new Promise((resolve, reject) => {
-        ffmpeg(inputFile)
-            .output(outputFile)
-            .videoCodec('libx264') // H.264 video encoding
-            .audioCodec('aac')     // AAC audio encoding
-            .format('mp4')         // Ensures MP4 output format
-            .outputOptions('-movflags +faststart') // Optimizes for web streaming
-            .on('end', () => {
-                console.log(`Conversion complete: ${outputFile}`);
-                resolve(outputFile);
-            })
-            .on('error', (err) => {
-                console.error('Error:', err);
-                reject(err);
-            })
-            .run();
-    });
-}
-
-function downloadFile(filePath) {
-    if (fs.existsSync(filePath)) {
-        console.log(`Download your file at: file://${path.resolve(filePath)}`);
-    } else {
-        console.error('File not found.');
+    if (fileInput.files.length === 0) {
+        status.innerText = "Please select an MKV file.";
+        return;
     }
+
+    const file = fileInput.files[0];
+    const fileName = file.name.replace(".mkv", ".mp4");
+
+    // Reset progress
+    progressBar.style.width = "0%";
+    progressContainer.style.display = "block";
+    status.innerText = "Converting...";
+
+    // Simulate conversion with a fake progress bar
+    let progress = 0;
+    const interval = setInterval(() => {
+        progress += 10;
+        progressBar.style.width = progress + "%";
+
+        if (progress >= 100) {
+            clearInterval(interval);
+            finishConversion(fileName);
+        }
+    }, 500);
+});
+
+function finishConversion(fileName) {
+    const status = document.getElementById("status");
+    const downloadLink = document.getElementById("downloadLink");
+
+    status.innerText = "Conversion completed!";
+    downloadLink.style.display = "block";
+    downloadLink.href = "#"; // Replace with actual file download path
+    downloadLink.download = fileName;
 }
-
-async function main() {
-    try {
-        const inputPath = path.resolve('input.mkv'); // Ensure full path
-        const outputPath = path.resolve(
-            path.dirname(inputPath),
-            path.basename(inputPath, path.extname(inputPath)) + '.mp4'
-        );
-
-        await convertMKVtoMP4(inputPath, outputPath);
-        console.log('Conversion successful!');
-        downloadFile(outputPath);
-    } catch (err) {
-        console.error('Conversion failed:', err);
-    }
-}
-
-main();
