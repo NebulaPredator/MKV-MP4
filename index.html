@@ -4,100 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MKV to MP4 Converter</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background: linear-gradient(135deg, #ff7eb3, #ff758c, #ff7eb3);
-            color: #fff;
-            margin: 0;
-        }
-
-        .container {
-            background: rgba(0, 0, 0, 0.85);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            width: 350px;
-            backdrop-filter: blur(10px);
-        }
-
-        h2 {
-            font-size: 22px;
-            margin-bottom: 20px;
-        }
-
-        input[type="file"] {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            cursor: pointer;
-            margin-bottom: 15px;
-            outline: none;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            background: #00c6ff;
-            color: #fff;
-            font-size: 16px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
-        }
-
-        button:hover {
-            background: #007bff;
-            transform: scale(1.05);
-        }
-
-        #downloadLink {
-            display: none;
-            margin-top: 15px;
-            padding: 12px;
-            background: #28a745;
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 8px;
-            transition: background 0.3s, transform 0.2s;
-            width: 100%;
-            text-align: center;
-            display: inline-block;
-        }
-
-        #downloadLink:hover {
-            background: #218838;
-            transform: scale(1.05);
-        }
-
-        #status {
-            margin-top: 15px;
-            font-size: 14px;
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <h2>MKV to MP4 Converter</h2>
         <input type="file" id="fileInput" accept=".mkv">
-        <button onclick="convertVideo()">Convert</button>
+        <button id="convertBtn">Convert</button>
+        
+        <div id="progressContainer">
+            <div id="progressBar"></div>
+        </div>
+
         <p id="status"></p>
         <a id="downloadLink" href="#" download>Download MP4</a>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
